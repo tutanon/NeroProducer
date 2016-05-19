@@ -43,7 +43,6 @@ int NeroJets::analyze(const edm::Event& iEvent, const edm::EventSetup &iSetup){
 
     if ( mOnlyMc  ) return 0;
 
-
     // maybe handle should be taken before
     iEvent.getByToken(token, handle);
     iEvent.getByToken(qg_token,qg_handle);
@@ -68,7 +67,7 @@ int NeroJets::analyze(const edm::Event& iEvent, const edm::EventSetup &iSetup){
         if ( !JetId(j,mMinId) ) continue;
 
         //0 < |eta| < 2.5: PUID > -0.63
-        if ( !(j.userFloat("pileupJetId:fullDiscriminant") > -0.63) ) continue;
+        //if ( !(j.userFloat("pileupJetIdUpdated:fullDiscriminant") > -0.63) ) continue;
 
         // GET  ValueMaps
         edm::RefToBase<pat::Jet> jetRef(edm::Ref<pat::JetCollection>(handle, ijetRef) );
@@ -180,7 +179,8 @@ int NeroJets::analyze(const edm::Event& iEvent, const edm::EventSetup &iSetup){
 
         // Fill output object	
         rawPt  -> push_back (j.pt()*j.jecFactor("Uncorrected"));
-        puId   -> push_back (j.userFloat("pileupJetId:fullDiscriminant") );
+        //puId   -> push_back (j.userFloat("pileupJetId:fullDiscriminant") );
+        puId   -> push_back (j.userFloat("pileupJetIdUpdated:fullDiscriminant") );
         bDiscr -> push_back( j.bDiscriminator("pfCombinedInclusiveSecondaryVertexV2BJetTags") );
         bDiscrLegacy -> push_back( j.bDiscriminator("combinedSecondaryVertexBJetTags") );
         qgl     -> push_back( qgLikelihood );
@@ -241,7 +241,6 @@ bool NeroJets::JetId(const pat::Jet &j, std::string id)
 
     if (id=="loose" || id=="monojet" || id=="monojetloose" || id=="monojet2015")
     {
-        //jetid = (NHF<0.99 && NEMF<0.99 && NumConst>1 && MUF<0.8) && ((fabs(j.eta())<=2.4 && CHF>0 && CHM>0 && CEMF<0.99) || fabs(j.eta())>2.4);
         jetid = (NHF<0.99 && NEMF<0.99 && NumConst>1) && ((fabs(eta)<=2.4 && CHF>0 && CHM>0 && CEMF<0.99) || fabs(eta)>2.4) && fabs(eta)<=3.0;
         jetid = jetid || (NEMF<0.90 && NumNeutralParticle>10 && fabs(eta)>3.0);
     }
