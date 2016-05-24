@@ -18,10 +18,13 @@ nero = cms.EDAnalyzer("Nero",
     photons = cms.InputTag("slimmedPhotons"),
     jets = cms.InputTag("slimmedJets"),
     puppijets = cms.InputTag("slimmedJetsPuppi"),
-    ############### RECLUSTERED JETS and MET
-    doReclustering = cms.bool(False),
 
     chsAK8 = cms.InputTag("slimmedJetsAK8"),
+
+    ############### RECLUSTERED JETS and MET
+
+    doReclustering = cms.bool(False),
+
     puppiAK8 = cms.InputTag("packedPatJetsPFAK8Puppi"),
     chsCA15 = cms.InputTag("packedPatJetsPFCA15CHS"),
     puppiCA15 = cms.InputTag("packedPatJetsPFCA15Puppi"),
