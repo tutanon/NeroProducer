@@ -161,6 +161,10 @@ int NeroPhotons::analyze(const edm::Event& iEvent,const edm::EventSetup &iSetup)
                  phoP4 *= corr;
         
         }
+<<<<<<< HEAD
+=======
+        
+>>>>>>> pushing the config that crab run on
         */
 
         //
