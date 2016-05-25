@@ -99,6 +99,7 @@ vers=v0.2;dir=TTbar_HBWB_HToTauNu_M-90_13TeV_pythia6 ;python sendOnBatch.py -i .
 * MINIAOD
 * edit test/crabNero.py to match the datasets you want
 ```
+source /cvmfs/cms.cern.ch/crab3/crab.csh 
 python crabNero.py
 ```
 * check the status with
