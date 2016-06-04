@@ -64,7 +64,8 @@ nero = cms.EDAnalyzer("Nero",
                                   'Flag_CSCTightHalo2015Filter', 
                                   'Flag_EcalDeadCellTriggerPrimitiveFilter', 
                                   'Flag_goodVertices', 
-                                  'Flag_eeBadScFilter'
+                                  'Flag_eeBadScFilter',
+                                  'Flag_globalTightHalo2016Filter'
                                   ]),
     #metFilterToken = cms.InputTag("TriggerResults"),          
     metFilterToken = cms.InputTag("TriggerResults","","RECO"),          
@@ -111,10 +112,6 @@ nero = cms.EDAnalyzer("Nero",
 				### DoubleMu / DoubleE cross check and sync with Z
 				'HLT_Ele17_CaloIdL_TrackIdL_IsoVL_v',
                                 'HLT_CaloMET200_NoiseCleaned',
-                                'Flag_CSCTightHaloFilter',
-                                'Flag_eeBadScFilter',
-                                'Flag_HBHENoiseFilter',
-                                'Flag_HBHENoiseIsoFilter'
 				]),
     prescales = cms.InputTag('patTrigger'),
     trigger = cms.InputTag("TriggerResults","","HLT"),

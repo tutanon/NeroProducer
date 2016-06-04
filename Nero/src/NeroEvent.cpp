@@ -17,6 +17,7 @@ NeroEvent::NeroEvent():
     metNameToBit["Flag_EcalDeadCellTriggerPrimitiveFilter"] = EcalDeadCellTriggerPrimitiveFilter;
     metNameToBit["Flag_goodVertices"] = goodVertices;
     metNameToBit["Flag_eeBadScFilter" ] = eeBadScFilter;
+    metNameToBit["Flag_globalTightHalo2016Filter" ] = GlobalTightHalo2016;
 }
 
 NeroEvent::~NeroEvent(){
