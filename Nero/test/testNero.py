@@ -171,30 +171,29 @@ process.es_prefer_jer = cms.ESPrefer('PoolDBESSource', 'jer')
 
 ################ end sqlite connection
 #### RECOMPUTE JEC From GT ###
-### from PhysicsTools.PatAlgos.tools.jetTools import updateJetCollection
-### 
-### jecLevels= ['L1FastJet',  'L2Relative', 'L3Absolute']
-### if options.isData:
-###         jecLevels =['L1FastJet',  'L2Relative', 'L3Absolute', 'L2L3Residual']
-### 
-### updateJetCollection(
-###    process,
-###    jetSource = process.nero.jets,
-###    labelName = 'UpdatedJEC',
-###    jetCorrections = ('AK4PFchs', cms.vstring(jecLevels), 'None')  # Do not forget 'L2L3Residual' on data!
-### )
-### print "-> Updating the jets collection to run on to 'updatedPatJetsUpdatedJEC' with the new jec in the GT"
-### process.nero.jets=cms.InputTag('updatedPatJetsUpdatedJEC')
-### process.jecSequence = cms.Sequence( process.patJetCorrFactorsUpdatedJEC* process.updatedPatJetsUpdatedJEC )
+from PhysicsTools.PatAlgos.tools.jetTools import updateJetCollection
+ 
+jecLevels= ['L1FastJet',  'L2Relative', 'L3Absolute']
+if options.isData:
+        jecLevels =['L1FastJet',  'L2Relative', 'L3Absolute', 'L2L3Residual']
+ 
+updateJetCollection(
+    process,
+    jetSource = process.nero.jets,
+    labelName = 'UpdatedJEC',
+    jetCorrections = ('AK4PFchs', cms.vstring(jecLevels), 'None')  # Do not forget 'L2L3Residual' on data!
+)
+print "-> Updating the jets collection to run on to 'updatedPatJetsUpdatedJEC' with the new jec in the GT"
+process.nero.jets=cms.InputTag('updatedPatJetsUpdatedJEC')
+process.jecSequence = cms.Sequence( process.patJetCorrFactorsUpdatedJEC* process.updatedPatJetsUpdatedJEC )
 
 ############ RECOMPUTE MET #######################
-## from PhysicsTools.PatUtils.tools.runMETCorrectionsAndUncertainties import runMetCorAndUncFromMiniAOD
-## runMetCorAndUncFromMiniAOD(process,
-##            isData=isData,
-##            )
-##
-## print "-> Updating the met collection to run on to 'slimmedMETs with nero' with the new jec in the GT for Type1"
+from PhysicsTools.PatUtils.tools.runMETCorrectionsAndUncertainties import runMetCorAndUncFromMiniAOD
+runMetCorAndUncFromMiniAOD(process,
+           isData=isData,
+           )
 
+print "-> Updating the met collection to run on to 'slimmedMETs with nero' with the new jec in the GT for Type1"
 
 
 # ------------------------QG-----------------------------------------------
@@ -250,9 +249,9 @@ process.p = cms.Path(
                 process.egmPhotonIDSequence *
                 process.photonIDValueMapProducer * ## ISO MAP FOR PHOTONS
                 process.electronIDValueMapProducer *  ## ISO MAP FOR PHOTONS
-                #process.jecSequence *
+                process.jecSequence *
                 process.QGTagger    * ## after jec, because it will produce the new jet collection
-                #process.fullPatMetSequence *## no puppi
+                process.fullPatMetSequence *## no puppi
                 process.nero
                 )
 
