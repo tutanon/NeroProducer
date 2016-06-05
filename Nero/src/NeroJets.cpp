@@ -4,7 +4,6 @@
 //JES
 #include "FWCore/Framework/interface/ESHandle.h"
 #include "JetMETCorrections/Modules/interface/JetResolution.h"
-
 #include <ctime>
 
 

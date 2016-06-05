@@ -78,9 +78,7 @@ int NeroFatJets::analyze(const edm::Event& iEvent){
             tau2 -> push_back(j.userFloat("NjettinessAK8:tau2"));
             tau3 -> push_back(j.userFloat("NjettinessAK8:tau3"));
 
-            trimmedMass ->push_back(j.userFloat("ak8PFJetsCHSTrimmedMass"));
             prunedMass  ->push_back(j.userFloat("ak8PFJetsCHSPrunedMass"));
-            filteredMass->push_back(j.userFloat("ak8PFJetsCHSFilteredMass"));
             softdropMass->push_back(j.userFloat("ak8PFJetsCHSSoftDropMass"));
 
             // --float hbb= j.bDiscriminator("pfBoostedDoubleSecondaryVertexAK8BJetTags"); // HBB 75X
