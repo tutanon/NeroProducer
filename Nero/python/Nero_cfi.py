@@ -65,7 +65,6 @@ nero = cms.EDAnalyzer("Nero",
                                   'Flag_eeBadScFilter',
                                   'Flag_globalTightHalo2016Filter'
                                   ]),
-    #metFilterToken = cms.InputTag("TriggerResults"),          
     metFilterToken = cms.InputTag("TriggerResults","","RECO"),          
 
     #

@@ -47,7 +47,8 @@ process.MessageLogger.cerr.FwkReport.reportEvery = 1000
 process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(-1) )
 
 if isData:
-   fileList = [
+   fileList = [       
+       '/store/data/Run2016B/MET/MINIAOD/PromptReco-v2/000/273/150/00000/2CF02CDC-D819-E611-AA68-02163E011A52.root'
        #'/store/data/Run2015D/MET/MINIAOD/16Dec2015-v1/50000/00EA1DB2-90AA-E511-AEEE-0025905C2CE6.root'
        #'/store/data/Run2015D/DoubleMuon/MINIAOD/16Dec2015-v1/10000/000913F7-E9A7-E511-A286-003048FFD79C.root'
        ]
@@ -203,9 +204,10 @@ from PhysicsTools.PatUtils.tools.runMETCorrectionsAndUncertainties import runMet
 runMetCorAndUncFromMiniAOD(process,
            isData=isData,
            )
-
 print "-> Updating the met collection to run on to 'slimmedMETs with nero' with the new jec in the GT for Type1"
-
+process.nero.mets=cms.InputTag('slimmedMETs','','nero')
+if not options.isData:
+            process.nero.metFilterToken=cms.InputTag("TriggerResults","","PAT")
 
 # ------------------------QG-----------------------------------------------
 # after jec, because need to be run on the corrected (latest) jet collection

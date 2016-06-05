@@ -34,8 +34,7 @@ Implementation:
 #include "NeroProducer/Nero/interface/NeroTrigger.hpp"
 #include "NeroProducer/Nero/interface/NeroMatching.hpp"
 
-//#define VERBOSE 2
-//#define VERBOSE 1
+//#define VERBOSE 0
 
 //
 // constants, enums and typedefs
@@ -118,6 +117,8 @@ Nero::Nero(const edm::ParameterSet& iConfig)
     chsAK8 -> mRunJEC = false; // these jets are already corrected in MiniAOD
     chsAK8 -> mOnlyMc = onlyMc;
     chsAK8 -> token = consumes<pat::JetCollection>(iConfig.getParameter<edm::InputTag>("chsAK8"));
+    chsAK8 -> rho_token = consumes<double>(iConfig.getParameter<edm::InputTag>("rho"));
+    chsAK8 -> vertex_token = consumes<reco::VertexCollection>(iConfig.getParameter<edm::InputTag>("vertices"));
     chsAK8 -> mMinPt = iConfig.getParameter<double>("minAK8CHSPt");
     chsAK8 -> mMaxEta = iConfig.getParameter<double>("minAK8CHSEta");
     chsAK8 -> mMinId = iConfig.getParameter<string>("minAK8CHSId");
@@ -469,9 +470,10 @@ Nero::beginJob()
     fileService_ -> make<TNamed>("triggerNames",myString.c_str());
 
     // define branches
-    for(auto o : obj)
+    for(auto o : obj){
+        if (dynamic_cast<NeroAll*> (o) !=NULL ) { continue ; }  // otherwise I will have also the branch in the main tree.       
         o -> defineBranches(tree_);
-
+    }
     for(auto o : lumiObj)
         o -> defineBranches(all_);
     

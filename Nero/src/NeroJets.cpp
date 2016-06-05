@@ -127,6 +127,7 @@ int NeroJets::analyze(const edm::Event& iEvent, const edm::EventSetup &iSetup){
         jecUnc_->setJetPt(j.pt()) ;//https://twiki.cern.ch/twiki/bin/view/CMSPublic/WorkBookJetEnergyCorrections  corrected jet pt
         float jecunc = jecUnc_->getUncertainty(true);
 
+        /*
         // JER
         if (not iEvent.isRealData())
         {
@@ -171,7 +172,8 @@ int NeroJets::analyze(const edm::Event& iEvent, const edm::EventSetup &iSetup){
             ptResUncUp->push_back(newptUp);
             ptResUncDown->push_back(newptDown) ;
         } // end is MC for JER
-
+        */
+        
         // Fill output object	
         rawPt  -> push_back (j.pt()*j.jecFactor("Uncorrected"));
         puId   -> push_back (j.userFloat("pileupJetId:fullDiscriminant") );
